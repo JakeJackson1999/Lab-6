@@ -47,6 +47,8 @@ public class ShapeTest
 	public void TriangleTest()
 	{
 		Shape tri = new EquilateralTriangle("Triangle1", 4.0);
+		System.out.println((4 * 4 * Math.sqrt(3)) / 4);
+		System.out.println(tri.getArea());
 		Assert.assertEquals("Equilateral Triangle area incorrect.", 
 				(4 * 4 * Math.sqrt(3)) / 4, tri.getArea(), 0.0001);
 		Assert.assertEquals("Equilateral Triangle perimeter incorrect.", 12.0, tri.getPerimeter(), 0.0001);
@@ -69,7 +71,7 @@ public class ShapeTest
 
 		Shape trap2 = new Trapezoid("Trapezoid2", 4.0, 4.0, 5.0, 6.0);
 		Assert.assertEquals("Trapezoid area incorrect.", 21.8274, trap2.getArea(), 0.0001);
-		Assert.assertEquals("Trapezoid perimeter incorrect.", 15.0, trap2.getPerimeter(), 0.0001);
+		Assert.assertEquals("Trapezoid perimeter incorrect.", 19.0, trap2.getPerimeter(), 0.0001);
 		Assert.assertEquals("Trapezoid type incorrect.", "Trapezoid", trap2.getShapeType());
 		Assert.assertEquals("Shape ID incorrect.", "Trapezoid2", trap2.getId());// TODO: complete this...
 	}
@@ -117,7 +119,7 @@ public class ShapeTest
 	public void ShapeToStringTest()
 	{
 		Shape sqr = new Square("Square1", 3.0);
-		Assert.assertEquals("Square:\t ID = Square1\t area = 9.0\t perimeter = 12.0", sqr.toString());// TODO: complete this...
+		Assert.assertEquals("Square:\t ID = Square1\t area = 9.000\t perimeter = 12.000", sqr.toString());// TODO: complete this...
 	}
 
 	//==================================================================================================================
@@ -155,6 +157,12 @@ public class ShapeTest
 	@Test
 	public void ComparePerimeterTest()
 	{
+		Shape rect = new Rectangle("R1", 5.0, 5.0);
+		Shape sqr = new Square("S1", 5.0);
+		ShapePerimeterComparator sc = new ShapePerimeterComparator();
+		Assert.assertEquals("ShapePerimeterComparator should find shapes equal.", 0, sc.compare(rect, sqr));
+		Assert.assertTrue("ShapePerimeterComparator should find shapes equal.", sc.equals(rect, sqr));
+		
 		// TODO: complete this...
 	}
 

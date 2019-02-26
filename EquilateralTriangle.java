@@ -23,9 +23,12 @@ public class EquilateralTriangle extends Polygon
 	{
 		super(id);
 		this.sideLength = sideLength;
-		for (int i = 0; i < sideLengths.size(); i++) {
+		/*for (int i = 0; i < sideLengths.size(); i++) {
 			sideLengths.set(sideLengths.get(i).intValue(), sideLength);// TODO: complete this...
-		}
+		}*/
+		sideLengths.add(sideLength);
+		sideLengths.add(sideLength);
+		sideLengths.add(sideLength);
 	}
 
 	/**
@@ -36,7 +39,8 @@ public class EquilateralTriangle extends Polygon
 	@Override
 	public double getArea()
 	{
-		return (sideLength * sideLength * Math.sqrt(3)) / 4;// TODO: complete this...
+		double area = ((sideLength * sideLength * Math.sqrt(3)) / 4);
+		return area;// TODO: complete this...
 	}
 
 	/**
