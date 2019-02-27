@@ -47,8 +47,6 @@ public class ShapeTest
 	public void TriangleTest()
 	{
 		Shape tri = new EquilateralTriangle("Triangle1", 4.0);
-		System.out.println((4 * 4 * Math.sqrt(3)) / 4);
-		System.out.println(tri.getArea());
 		Assert.assertEquals("Equilateral Triangle area incorrect.", 
 				(4 * 4 * Math.sqrt(3)) / 4, tri.getArea(), 0.0001);
 		Assert.assertEquals("Equilateral Triangle perimeter incorrect.", 12.0, tri.getPerimeter(), 0.0001);
@@ -157,13 +155,24 @@ public class ShapeTest
 	@Test
 	public void ComparePerimeterTest()
 	{
-		Shape rect = new Rectangle("R1", 5.0, 5.0);
-		Shape sqr = new Square("S1", 5.0);
+		// Test equals:
+		Shape rect3 = new Rectangle("R3", 5.0, 5.0);
+		Shape sqr3 = new Square("S3", 5.0);
 		ShapePerimeterComparator sc = new ShapePerimeterComparator();
-		Assert.assertEquals("ShapePerimeterComparator should find shapes equal.", 0, sc.compare(rect, sqr));
-		Assert.assertTrue("ShapePerimeterComparator should find shapes equal.", sc.equals(rect, sqr));
+		Assert.assertEquals("ShapePerimeterComparator should find shapes equal.", 0, sc.compare(rect3, sqr3));
+		Assert.assertTrue("ShapePerimeterComparator should find shapes equal.", sc.equals(rect3, sqr3));
 		
-		// TODO: complete this...
+		// Test equal area, different perimeter:
+		Shape rect4 = new Rectangle("R4", 2.0, 8.0);
+        Shape sqr4 = new Square("S4", 4.0);
+        Assert.assertEquals("ShapePerimeterComparator gave incorrect ordering.", 1, sc.compare(rect4, sqr4));
+        Assert.assertEquals("ShapePerimeterComparator gave incorrect ordering.", -1, sc.compare(sqr4, rect4));
+        Assert.assertFalse("ShapePerimeterComparator incorrectly finds shapes equal.", sc.equals(rect4, sqr4));
+        
+     // Test unequal perimeter and area:
+        Assert.assertEquals("ShapePerimeteraComparator gave incorrect ordering.", -1, sc.compare(sqr4, rect3));
+        Assert.assertEquals("ShapePerimeterComparator gave incorrect ordering.", 1, sc.compare(rect3, sqr4));
+        Assert.assertFalse("ShapePerimeterComparator incorrectly finds shapes equal.", sc.equals(sqr4, rect3));// TODO: complete this...
 	}
 
 	/**
@@ -172,6 +181,16 @@ public class ShapeTest
 	@Test
     public void NaturalCompareTest()
     {
-		// TODO: complete this...
+		ShapeSorter sorter = new ShapeSorter();
+		
+		Shape s1 = new Square("A", 6.0);
+		Shape s2 = new Rectangle("B", 3.0, 2.0);
+		Shape s3 = new Rectangle("C", 1.0, 4.0);
+		
+		sorter.addShape(s1);
+		sorter.addShape(s3);
+		sorter.addShape(s2);
+		
+		sorter.sortShapes();// TODO: complete this...
     }
 }
